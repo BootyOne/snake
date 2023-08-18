@@ -1,5 +1,5 @@
 import pygame
-from classes import SnakeBlock
+from Blocks import SnakeBlock
 
 pygame.init()
 
@@ -28,12 +28,3 @@ bad_blocks = []
 blocks_count = 21
 size = [30 * 21 + 2 * 30 + 1 * 21, 30 * 21 + 2 * 30 + 1 * 21 + 71]
 screen = pygame.display.set_mode(size)
-
-
-def draw_block(_color, _row, _column):
-    pygame.draw.rect(screen, _color,
-                     [block_size + _column * block_size +
-                      margin * (_column + 1),
-                      header_margin + block_size + _row *
-                      block_size + margin * (_row + 1),
-                      block_size, block_size])

@@ -1,6 +1,6 @@
 import pygame
-from classes import Bad_block
-import globals
+from Blocks import BadBlock
+import config
 
 
 def easy_level():
@@ -12,22 +12,24 @@ def easy_level():
 def first_level(bad_blocks):
     globals.blocks_count = 21
     this_is_a_victory = 300
-    bad_blocks += [Bad_block(1, 1), Bad_block(1, 2), Bad_block(1, 3),
-                   Bad_block(2, 1), Bad_block(2, 2), Bad_block(2, 3),
-                   Bad_block(3, 1), Bad_block(3, 2), Bad_block(3, 3),
-                   Bad_block(17, 1), Bad_block(17, 2), Bad_block(17, 3),
-                   Bad_block(18, 1), Bad_block(18, 2), Bad_block(18, 3),
-                   Bad_block(19, 1), Bad_block(19, 2), Bad_block(19, 3),
-                   Bad_block(1, 17), Bad_block(2, 17), Bad_block(3, 17),
-                   Bad_block(1, 18), Bad_block(2, 18), Bad_block(3, 18),
-                   Bad_block(1, 19), Bad_block(2, 19), Bad_block(3, 19),
-                   Bad_block(17, 17), Bad_block(17, 18), Bad_block(17, 19),
-                   Bad_block(18, 17), Bad_block(18, 18), Bad_block(18, 19),
-                   Bad_block(19, 17), Bad_block(19, 18), Bad_block(19, 19)]
+    bad_blocks += [
+        BadBlock(1, 1), BadBlock(1, 2), BadBlock(1, 3),
+        BadBlock(2, 1), BadBlock(2, 2), BadBlock(2, 3),
+        BadBlock(3, 1), BadBlock(3, 2), BadBlock(3, 3),
+        BadBlock(17, 1), BadBlock(17, 2), BadBlock(17, 3),
+        BadBlock(18, 1), BadBlock(18, 2), BadBlock(18, 3),
+        BadBlock(19, 1), BadBlock(19, 2), BadBlock(19, 3),
+        BadBlock(1, 17), BadBlock(2, 17), BadBlock(3, 17),
+        BadBlock(1, 18), BadBlock(2, 18), BadBlock(3, 18),
+        BadBlock(1, 19), BadBlock(2, 19), BadBlock(3, 19),
+        BadBlock(17, 17), BadBlock(17, 18), BadBlock(17, 19),
+        BadBlock(18, 17), BadBlock(18, 18), BadBlock(18, 19),
+        BadBlock(19, 17), BadBlock(19, 18), BadBlock(19, 19)
+    ]
     for i in range(globals.blocks_count):
         for j in range(globals.blocks_count):
             if (i == 10 and 3 < j < 17) or (j == 10 and 3 < i < 17):
-                bad_blocks.append(Bad_block(i, j))
+                bad_blocks.append(BadBlock(i, j))
     return globals.blocks_count, this_is_a_victory, bad_blocks, "Easy"
 
 
@@ -38,9 +40,9 @@ def second_level(bad_blocks):
     for i_1 in range(globals.blocks_count):
         for j_1 in range(globals.blocks_count):
             if (j_1 == 1 and 2 < i_1 < 12) or \
-                    (j_1 == 13 and 2 < i_1 < 12) or\
+                    (j_1 == 13 and 2 < i_1 < 12) or \
                     (j_1 == 7 and 2 < i_1 < 12):
-                bad_blocks.append(Bad_block(i_1, j_1))
+                bad_blocks.append(BadBlock(i_1, j_1))
     return font, this_is_a_victory, globals.blocks_count, bad_blocks, "Medium"
 
 
@@ -51,5 +53,5 @@ def third_level(bad_blocks):
     for i_1 in range(globals.blocks_count):
         for j_1 in range(globals.blocks_count):
             if (j_1 == 1 and 1 < i_1 < 7) or (j_1 == 7 and 1 < i_1 < 7):
-                bad_blocks.append(Bad_block(i_1, j_1))
+                bad_blocks.append(BadBlock(i_1, j_1))
     return font, this_is_a_victory, globals.blocks_count, bad_blocks, "Hard"

@@ -1,13 +1,14 @@
 import sys
 import random
 
-import globals
 from levels import easy_level, first_level, second_level, third_level
 from menu import Menu
-from globals import frame_color, blue, white, red, black, header_color,\
-    snake_color, block_size, header_margin, timer, snake_blocks,\
-    bad_blocks, blocks_count, size, screen, draw_block, pygame, SnakeBlock
-from classes import Bad_block
+from config import (
+    frame_color, blue, white, red, black, header_color, snake_color, block_size, header_margin,
+    timer, snake_blocks, bad_blocks, blocks_count, size, screen, pygame, SnakeBlock
+)
+from utils import draw_block
+from Blocks import BadBlock
 from save import Save
 from pause import pause_menu
 
@@ -44,7 +45,7 @@ def get_random_entry_block():
     x = random.randint(1, globals.blocks_count - 1)
     y = random.randint(1, globals.blocks_count - 1)
     empty_block = SnakeBlock(x, y)
-    while empty_block in snake_blocks or Bad_block(x, y) in bad_blocks:
+    while empty_block in snake_blocks or BadBlock(x, y) in bad_blocks:
         x = random.randint(1, globals.blocks_count - 1)
         y = random.randint(1, globals.blocks_count - 1)
         empty_block = SnakeBlock(x, y)
@@ -76,7 +77,7 @@ while True:
                              text_speed.get_size()[0] // 1.6, block_size))
     for row in range(globals.blocks_count):
         for column in range(globals.blocks_count):
-            if Bad_block(row, column) in bad_blocks:
+            if BadBlock(row, column) in bad_blocks:
                 color = black
             elif (row + column) % 2 == 0:
                 color = blue
@@ -143,7 +144,7 @@ while True:
                     pygame.display.flip()
 
     if not head.is_inside(globals.blocks_count)\
-            or Bad_block(head.x, head.y) in bad_blocks:
+            or BadBlock(head.x, head.y) in bad_blocks:
         if name == "Super easy" and total > score[0]:
             save.save(name, total)
             score[0] = total

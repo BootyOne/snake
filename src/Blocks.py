@@ -7,15 +7,13 @@ class SnakeBlock:
         return 0 <= self.x < blocks_count and 0 <= self.y < blocks_count
 
     def __eq__(self, other):
-        return isinstance(other, SnakeBlock) and\
-               self.x == other.x and self.y == other.y
+        return isinstance(other, SnakeBlock) and self.x == other.x and self.y == other.y
 
 
-class Bad_block:
+class BadBlock:
     def __init__(self, x, y):
         self.x = x
         self.y = y
 
     def __eq__(self, other):
-        return isinstance(other, Bad_block) and\
-               self.x == other.x and self.y == other.y
+        return isinstance(other, BadBlock) and self.x == other.x and self.y == other.y
