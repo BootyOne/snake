@@ -4,8 +4,8 @@ import random
 from levels import easy_level, first_level, second_level, third_level
 from menu import Menu
 from config import (
-    frame_color, blue, white, red, black, header_color, snake_color, block_size, header_margin,
-    timer, snake_blocks, bad_blocks, blocks_count, size, screen, pygame, SnakeBlock
+    frame_color, blue, white, red, black, header_color, snake_color, block_size, header_margin, d_row, can_move,
+    timer, snake_blocks, bad_blocks, blocks_count, size, screen, pygame, SnakeBlock, total, speed, lives, d_col, font
 )
 from utils import draw_block
 from Blocks import BadBlock
@@ -17,24 +17,24 @@ score = [save.get("Super easy"), save.get("Easy"),
          save.get("Medium"), save.get("Hard")]
 game = Menu(size, score)
 
-bad_blocks = globals.bad_blocks
+# bad_blocks = config.bad_blocks
 _done = True
 while _done:
     game.menu(screen)
     level = game.choose_difficulty(screen)
     if level == 1:
-        globals.blocks_count, this_is_a_victory, \
+        blocks_count, this_is_a_victory, \
             bad_blocks, name = first_level(bad_blocks)
         _done = False
     elif level == 2:
-        font, this_is_a_victory, globals.blocks_count, \
+        font, this_is_a_victory, blocks_count, \
             bad_blocks, name = second_level(bad_blocks)
         _done = False
     elif level == 4:
         _done = False
-        globals.blocks_count, this_is_a_victory, name = easy_level()
+        blocks_count, this_is_a_victory, name = easy_level()
     elif level == 3:
-        font, this_is_a_victory, globals.blocks_count, \
+        font, this_is_a_victory, blocks_count, \
             bad_blocks, name = third_level(bad_blocks)
         _done = False
     elif level == -1:
@@ -42,25 +42,14 @@ while _done:
 
 
 def get_random_entry_block():
-    x = random.randint(1, globals.blocks_count - 1)
-    y = random.randint(1, globals.blocks_count - 1)
+    x = random.randint(1, blocks_count - 1)
+    y = random.randint(1, blocks_count - 1)
     empty_block = SnakeBlock(x, y)
     while empty_block in snake_blocks or BadBlock(x, y) in bad_blocks:
-        x = random.randint(1, globals.blocks_count - 1)
-        y = random.randint(1, globals.blocks_count - 1)
+        x = random.randint(1, blocks_count - 1)
+        y = random.randint(1, blocks_count - 1)
         empty_block = SnakeBlock(x, y)
     return empty_block
-
-
-font = globals.font
-total = globals.total
-speed = globals.speed
-lives = globals.lives
-snake_blocks = globals.snake_blocks
-d_row = globals.d_row
-can_move = globals.can_move
-d_col = globals.d_col
-this_is_a_victory = globals.this_is_a_victory
 
 apple = get_random_entry_block()
 
@@ -75,8 +64,8 @@ while True:
     screen.blit(text_lives, (blocks_count * block_size // 2, block_size))
     screen.blit(text_speed, (block_size * blocks_count -
                              text_speed.get_size()[0] // 1.6, block_size))
-    for row in range(globals.blocks_count):
-        for column in range(globals.blocks_count):
+    for row in range(blocks_count):
+        for column in range(blocks_count):
             if BadBlock(row, column) in bad_blocks:
                 color = black
             elif (row + column) % 2 == 0:
@@ -137,13 +126,13 @@ while True:
                     new_head = head = snake_blocks[-1]
                     d_row = 0
                     d_col = 1
-                    globals.blocks_count, this_is_a_victory, bad_blocks,\
+                    blocks_count, this_is_a_victory, bad_blocks,\
                         name, font = pause_menu(level, bad_blocks, font)
                     apple = get_random_entry_block()
                     done = False
                     pygame.display.flip()
 
-    if not head.is_inside(globals.blocks_count)\
+    if not head.is_inside(blocks_count)\
             or BadBlock(head.x, head.y) in bad_blocks:
         if name == "Super easy" and total > score[0]:
             save.save(name, total)
@@ -171,7 +160,7 @@ while True:
         new_head = head = snake_blocks[-1]
         d_row = 0
         d_col = 1
-        globals.blocks_count, this_is_a_victory, bad_blocks, name,\
+        blocks_count, this_is_a_victory, bad_blocks, name,\
             font = pause_menu(level, bad_blocks, font)
         apple = get_random_entry_block()
         done = False
@@ -209,7 +198,7 @@ while True:
             new_head = head = snake_blocks[-1]
             d_row = 0
             d_col = 1
-            globals.blocks_count, this_is_a_victory, bad_blocks,\
+            blocks_count, this_is_a_victory, bad_blocks,\
                 name, font = pause_menu(level, bad_blocks, font)
             apple = get_random_entry_block()
             done = False

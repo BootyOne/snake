@@ -207,19 +207,19 @@ class Menu:
             game.menu(screen)
             level = game.choose_difficulty(screen)
             if level == 1:
-                globals.blocks_count, this_is_a_victory, bad_blocks,\
+                blocks_count, this_is_a_victory, bad_blocks,\
                     name = first_level(bad_blocks)
                 _done = False
             elif level == 2:
-                font, this_is_a_victory, globals.blocks_count,\
+                font, this_is_a_victory, blocks_count,\
                     bad_blocks, name = second_level(bad_blocks)
                 _done = False
             elif level == 4:
                 _done = False
-                globals.blocks_count, this_is_a_victory,\
+                blocks_count, this_is_a_victory,\
                     name = easy_level()
             elif level == 3:
-                font, this_is_a_victory, globals.blocks_count,\
+                font, this_is_a_victory, blocks_count,\
                     bad_blocks, name = third_level(bad_blocks)
                 _done = False
             elif level == -1:
