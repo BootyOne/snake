@@ -17,7 +17,6 @@ score = [save.get("Super easy"), save.get("Easy"),
          save.get("Medium"), save.get("Hard")]
 game = Menu(size, score)
 
-# bad_blocks = config.bad_blocks
 _done = True
 while _done:
     game.menu(screen)
@@ -50,6 +49,7 @@ def get_random_entry_block():
         y = random.randint(1, blocks_count - 1)
         empty_block = SnakeBlock(x, y)
     return empty_block
+
 
 apple = get_random_entry_block()
 
@@ -126,13 +126,13 @@ while True:
                     new_head = head = snake_blocks[-1]
                     d_row = 0
                     d_col = 1
-                    blocks_count, this_is_a_victory, bad_blocks,\
+                    blocks_count, this_is_a_victory, bad_blocks, \
                         name, font = pause_menu(level, bad_blocks, font)
                     apple = get_random_entry_block()
                     done = False
                     pygame.display.flip()
 
-    if not head.is_inside(blocks_count)\
+    if not head.is_inside(blocks_count) \
             or BadBlock(head.x, head.y) in bad_blocks:
         if name == "Super easy" and total > score[0]:
             save.save(name, total)
@@ -160,7 +160,7 @@ while True:
         new_head = head = snake_blocks[-1]
         d_row = 0
         d_col = 1
-        blocks_count, this_is_a_victory, bad_blocks, name,\
+        blocks_count, this_is_a_victory, bad_blocks, name, \
             font = pause_menu(level, bad_blocks, font)
         apple = get_random_entry_block()
         done = False
@@ -198,7 +198,7 @@ while True:
             new_head = head = snake_blocks[-1]
             d_row = 0
             d_col = 1
-            blocks_count, this_is_a_victory, bad_blocks,\
+            blocks_count, this_is_a_victory, bad_blocks, \
                 name, font = pause_menu(level, bad_blocks, font)
             apple = get_random_entry_block()
             done = False

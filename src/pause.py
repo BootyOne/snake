@@ -1,4 +1,3 @@
-import config
 from levels import easy_level, first_level, second_level, third_level
 
 

@@ -2,7 +2,6 @@ import pygame
 import sys
 from levels import easy_level, first_level, second_level, third_level
 from Blocks import SnakeBlock
-import config
 
 
 class Menu:
